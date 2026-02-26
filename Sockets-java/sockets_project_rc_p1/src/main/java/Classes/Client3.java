@@ -1,14 +1,17 @@
 package Classes;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Cllient {
+public class Client3 {
 
     public static void main(String[] args) {
 
         try{
-            System.out.println("Client started");
+            System.out.println("Client3 started");
             Socket sck=new Socket("localhost",9806);
 
             InputStreamReader isr=new InputStreamReader(System.in);
@@ -31,5 +34,4 @@ public class Cllient {
         }
 
     }
-
 }
