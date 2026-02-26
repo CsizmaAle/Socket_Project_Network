@@ -12,24 +12,21 @@ public class Server {
             System.out.println("Server waiting for clients...");
 
             ServerSocket serverSocket = new ServerSocket(9806);
-            Socket sck=serverSocket.accept();
+            serverSocket.setReuseAddress(true);
+            Socket sck=null;
 
-            System.out.println("Client connected!");
+            while(true)
+            {
 
-            InputStreamReader isr=new InputStreamReader(sck.getInputStream());
-            BufferedReader serverIn=new BufferedReader(isr);
-
-            String message=serverIn.readLine();
-            System.out.println(message);
-
-            OutputStream os = sck.getOutputStream();
-            PrintWriter serverOut = new PrintWriter(os, true);
-
-            serverOut.println("Messaje: "+ message);
-
+                sck=serverSocket.accept();
+                System.out.println("Client connected");
+                ClientHandler clientSocket=new ClientHandler(sck);
+                new Thread(clientSocket).start();
+            }
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 }
