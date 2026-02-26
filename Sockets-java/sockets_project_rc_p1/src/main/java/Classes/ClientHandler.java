@@ -6,10 +6,12 @@ import java.net.Socket;
 public class ClientHandler implements Runnable{
 
     private final Socket clientSocket;
+    private final int clientID;
 
-    public ClientHandler(Socket socketClient)
+    public ClientHandler(Socket socketClient, int clientID)
     {
         this.clientSocket = socketClient;
+        this.clientID = clientID;
     }
 
     public void run(){
@@ -26,7 +28,11 @@ public class ClientHandler implements Runnable{
             while(true){
                 message1=serverIn.readLine();
                 serverOut.println(message1);
-                System.out.println("De la client: " + message1);
+                System.out.println("Message from client" + clientID + ": " + message1 +
+                        "; port sursa: " + clientSocket.getPort() +
+                        "; port destinatie: "+ clientSocket.getLocalPort()+
+                        "; adresa IP sursa: " + clientSocket.getInetAddress().getHostAddress()+
+                        "; adresa IP destinatie: "+ clientSocket.getLocalAddress().getHostAddress());
             }
         }catch(Exception e) {
             System.out.println(e);

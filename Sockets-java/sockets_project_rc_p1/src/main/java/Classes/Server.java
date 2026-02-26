@@ -10,6 +10,7 @@ public class Server {
 
         try{
             System.out.println("Server waiting for clients...");
+            int clientID=0;
 
             ServerSocket serverSocket = new ServerSocket(9806);
             serverSocket.setReuseAddress(true);
@@ -17,11 +18,11 @@ public class Server {
 
             while(true)
             {
-
                 sck=serverSocket.accept();
-                System.out.println("Client connected");
-                ClientHandler clientSocket=new ClientHandler(sck);
+                System.out.println("Client " + clientID + " connected");
+                ClientHandler clientSocket=new ClientHandler(sck, clientID);
                 new Thread(clientSocket).start();
+                clientID++;
             }
 
         }catch (Exception e){
