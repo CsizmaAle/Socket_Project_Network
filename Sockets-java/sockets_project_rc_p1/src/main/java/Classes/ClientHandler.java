@@ -35,8 +35,8 @@ public class ClientHandler implements Runnable{
                         "; adresa IP destinatie: "+ clientSocket.getLocalAddress().getHostAddress());
             }
         }catch(Exception e) {
-            System.out.println(e);
-            System.out.println("Client connection lost!");
+            //System.out.println(e);
+            System.out.println("Client " +clientID +" connection lost!");
         }
     }
 }

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\devGitHub\\Socket_Project_Network\\Sockets-cpp\\server_part\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{13FFCB54-C797-4D96-86D2-70FF29E867DC}|server_part.vcxproj|C:\\devGitHub\\Socket_Project_Network\\Sockets-cpp\\server_part\\server_part.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{13FFCB54-C797-4D96-86D2-70FF29E867DC}|server_part.vcxproj|solutionrelative:server_part.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "server_part.cpp",
+              "DocumentMoniker": "C:\\devGitHub\\Socket_Project_Network\\Sockets-cpp\\server_part\\server_part.cpp",
+              "RelativeDocumentMoniker": "server_part.cpp",
+              "ToolTip": "C:\\devGitHub\\Socket_Project_Network\\Sockets-cpp\\server_part\\server_part.cpp",
+              "RelativeToolTip": "server_part.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-26T16:24:55.914Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

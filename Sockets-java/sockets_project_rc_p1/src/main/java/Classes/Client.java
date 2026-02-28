@@ -32,10 +32,10 @@ public class Client {
                 userOut.println(message);
 
                System.out.println("Message from server:" + userIn2.readLine() +
-                       "; port sursa: " + sck.getLocalPort() +
-                       "; port destinatie: "+ sck.getPort()+
-                       "; adresa IP sursa: " + sck.getLocalAddress().getHostAddress()+
-                       "; adresa IP destinatie: "+ sck.getInetAddress().getHostAddress());
+                       "; port sursa: " + sck.getPort() +
+                       "; port destinatie: "+ sck.getLocalPort()+
+                       "; adresa IP sursa: " + sck.getInetAddress().getHostAddress()+
+                       "; adresa IP destinatie: "+ sck.getLocalAddress().getHostAddress());
             }while(!"exit".equalsIgnoreCase(message));
 
         }catch(Exception e){
