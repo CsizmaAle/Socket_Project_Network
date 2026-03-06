@@ -4,9 +4,15 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+typedef struct {
+    int id;
+    SOCKET clientSocket;
+} ClientInfo;
+
 DWORD WINAPI clientHandler(LPVOID arg) {
-    int id = *(int*)arg;
-    SOCKET clientSocket = *(SOCKET*)arg;
+    ClientInfo *clientInfo = (ClientInfo*)arg;
+    int id = clientInfo->id;
+    SOCKET clientSocket = clientInfo->clientSocket;
     int bytesReceived;
     char recvBuffer[1024];
 
@@ -15,10 +21,19 @@ DWORD WINAPI clientHandler(LPVOID arg) {
         recvBuffer[bytesReceived] = '\0';
 
         printf("Client %d: %s\n", id, recvBuffer);
-        send(clientSocket, recvBuffer, bytesReceived, 0);
+        if (stricmp(recvBuffer, "exit") == 0)
+        {
+            printf("Client %d disconnected.\n", id);
+            closesocket(clientSocket);
+            free(arg);
+            return 0;
+
+        }else
+        {
+            send(clientSocket, recvBuffer, bytesReceived, 0);
+        }
     }
     
-    closesocket(clientSocket);
     return 0;
 }
 
@@ -40,6 +55,10 @@ int main(){
     bind(serverSocket,(struct sockaddr*)&serverAddr,sizeof(serverAddr));
 
     listen(serverSocket,3);
+    if(listen(serverSocket, 3) == SOCKET_ERROR) {
+        printf("Listen failed with error: %d\n", WSAGetLastError());
+        return 1;
+    }
 
     int newSocket, id=0;
 
@@ -47,8 +66,13 @@ int main(){
          newSocket = accept(serverSocket, (struct sockaddr*)&serverStorage, &addr_size);
          SOCKET *pclient=malloc(sizeof(SOCKET));
          *pclient=newSocket;
-
-         CreateThread(NULL, 0, clientHandler, pclient, 0, NULL);
+         printf("Client %d connected.\n", id);
+         ClientInfo *clientInfo = malloc(sizeof(ClientInfo));
+            clientInfo->id = id;
+            clientInfo->clientSocket = newSocket;
+         CreateThread(NULL, 0, clientHandler, clientInfo, 0, NULL);
+         id++;
+        
     }
 
     return 0;
