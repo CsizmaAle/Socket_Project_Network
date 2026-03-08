@@ -16,11 +16,24 @@ DWORD WINAPI clientHandler(LPVOID arg) {
     int bytesReceived;
     char recvBuffer[1024];
 
+    struct sockaddr_in srcAddr, destAddr;
+    int len = sizeof(struct sockaddr_in);
+
+    getpeername(clientSocket, (struct sockaddr*)&srcAddr, &len);
+    getsockname(clientSocket, (struct sockaddr*)&destAddr, &len);
+
+    char *scrIp=inet_ntoa(srcAddr.sin_addr);
+    char *destIp=inet_ntoa(destAddr.sin_addr);
+
+    int scrPort=ntohs(srcAddr.sin_port);
+    int destPort=ntohs(destAddr.sin_port);
+
     while(1){
         bytesReceived=recv(clientSocket, recvBuffer, sizeof(recvBuffer), 0);
         recvBuffer[bytesReceived] = '\0';
 
-        printf("Client %d: %s\n", id, recvBuffer);
+        printf("From client %d: %s; port sursa: %d, port destinatie: %d; adresa IP sursa: %s, adresa IP destinatie: %s\n", id, recvBuffer, scrPort, destPort, scrIp, destIp);
+
         if (stricmp(recvBuffer, "exit") == 0)
         {
             printf("Client %d disconnected.\n", id);
